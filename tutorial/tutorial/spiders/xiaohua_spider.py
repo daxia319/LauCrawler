@@ -4,6 +4,10 @@ from tutorial.items import XiaoHuaItem
 from scrapy.linkextractors import LinkExtractor
 from scrapy.http import Request
 
+def printhxs(hxs):
+    for i in hxs:
+        print i.encode('utf-8')
+
 '''
     <div class="item_t">
 <div class="top-title">TOP1</div>
@@ -32,6 +36,7 @@ class XiaohuaSpider(scrapy.Spider):
             item = XiaoHuaItem()
             sub_sel = sel.xpath('.//div[@class="img"]')
             item['name'] = sub_sel.xpath('.//span/text()').extract()
+            printhxs(item['name'])
             item['rank'] = sel.xpath('.//div[@class="top-title"]/text()').extract()
             item['school'] = sub_sel.xpath('.//a/img/@alt').extract()
             img_link = sub_sel.xpath('.//a/img/@src').extract()[0]
